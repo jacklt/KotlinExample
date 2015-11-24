@@ -32,9 +32,10 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.item = mValues.get(position);
-        holder.idView.setText(mValues.get(position).id);
-        holder.contentView.setText(mValues.get(position).content);
+        HeroItem hero = mValues.get(position);
+        holder.item = hero;
+        holder.idView.setText(hero.getId());
+        holder.contentView.setText(hero.getContent());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
