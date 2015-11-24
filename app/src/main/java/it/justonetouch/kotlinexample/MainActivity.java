@@ -11,10 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import it.justonetouch.kotlinexample.dummy.HeroAdapter;
 import it.justonetouch.kotlinexample.dummy.HeroDummyContent;
 import it.justonetouch.kotlinexample.dummy.HeroItem;
-import it.justonetouch.kotlinexample.dummy.HeroAdapter;
-import it.justonetouch.kotlinexample.dummy.HeroOnClickListener;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new HeroAdapter(HeroDummyContent.ITEMS, new HeroOnClickListener() {
+        adapter = new HeroAdapter(HeroDummyContent.ITEMS, new Function1<HeroItem, Unit>() {
             @Override
-            public void onClickHero(HeroItem item) {
+            public Unit invoke(HeroItem item) {
                 Snackbar.make(fab, "Tap on: " + item, Snackbar.LENGTH_SHORT).show();
+                return null;
             }
         });
 

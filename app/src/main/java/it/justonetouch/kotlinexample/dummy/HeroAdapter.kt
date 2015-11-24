@@ -12,7 +12,7 @@ import it.justonetouch.kotlinexample.R
  * [RecyclerView.Adapter] that can display a [HeroItem] and makes a call to the
  * specified [HeroOnClickListener].
  */
-class HeroAdapter(private val mValues: List<HeroItem>, private val mListener: HeroOnClickListener?) : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
+class HeroAdapter(private val mValues: List<HeroItem>, private val mListener: Function1<HeroItem, Unit>?) : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_hero, parent, false)
@@ -26,7 +26,7 @@ class HeroAdapter(private val mValues: List<HeroItem>, private val mListener: He
         holder.contentView.text = hero.content
 
         holder.itemView.setOnClickListener {
-            mListener?.onClickHero(holder.item)
+            mListener?.invoke(hero)
         }
     }
 
