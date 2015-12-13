@@ -22,8 +22,8 @@ class HeroAdapter(private val mValues: List<HeroItem>, private val mListener: Fu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hero = mValues[position]
         holder.item = hero
-        holder.idView.text = hero.name
-        holder.contentView.text = hero.gender
+        holder.nameView.text = "${hero.name} (Power: ${hero.power})"
+        holder.genderView.text = hero.gender
 
         holder.itemView.setOnClickListener {
             mListener?.invoke(hero)
@@ -33,13 +33,13 @@ class HeroAdapter(private val mValues: List<HeroItem>, private val mListener: Fu
     override fun getItemCount() = mValues.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView        // Property READ-ONLY (val)
-        val contentView: TextView   // Property READ-ONLY (val)
+        val nameView: TextView        // Property READ-ONLY (val)
+        val genderView: TextView   // Property READ-ONLY (val)
         var item: HeroItem? = null  // Property READ-WRITE (var) and nullable (?)
 
         init {
-            idView = view.findViewById(R.id.id) as TextView
-            contentView = view.findViewById(R.id.content) as TextView
+            nameView = view.findViewById(R.id.name) as TextView
+            genderView = view.findViewById(R.id.gender) as TextView
         }
     }
 }
