@@ -17,8 +17,23 @@ class MainActivity : AppCompatActivity() {
 
     private val adapter by lazy {
         HeroAdapter(HeroDummyContent.ITEMS) {
-            currentHero = it
-            Snackbar.make(fab, "Tap on: " + it, Snackbar.LENGTH_SHORT).show()
+            val previousHero = currentHero
+            if (previousHero != null) {
+                // fight
+                val conclusion = if (previousHero.power == it.power) {
+                    "It's a draw"
+                } else if (previousHero.power > it.power) {
+                    "${previousHero.name} wins!"
+                } else {
+                    "${it.name} wins!"
+                }
+                Snackbar.make(fab, "${previousHero.name} vs ${it.name}!\n$conclusion", Snackbar.LENGTH_LONG).show()
+                currentHero = null
+            } else {
+                // assign current hero
+                Snackbar.make(fab, "Choose: ${it.name}", Snackbar.LENGTH_SHORT).show()
+                currentHero = it
+            }
         }
     }
 
