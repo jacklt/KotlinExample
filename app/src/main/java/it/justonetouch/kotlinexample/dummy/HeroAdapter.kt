@@ -22,8 +22,8 @@ class HeroAdapter(private val mValues: List<HeroItem>, private val mListener: Fu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hero = mValues[position]
         holder.item = hero
-        holder.idView.text = hero.id
-        holder.contentView.text = hero.content
+        holder.idView.text = hero.name
+        holder.contentView.text = hero.gender
 
         holder.itemView.setOnClickListener {
             mListener?.invoke(hero)
