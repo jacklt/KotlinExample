@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import it.justonetouch.kotlinexample.dummy.HeroAdapter
 import it.justonetouch.kotlinexample.dummy.HeroDummyContent
-import kotlinx.android.synthetic.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
