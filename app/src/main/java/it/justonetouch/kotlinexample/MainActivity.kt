@@ -8,12 +8,18 @@ import android.view.Menu
 import android.view.MenuItem
 import it.justonetouch.kotlinexample.dummy.HeroAdapter
 import it.justonetouch.kotlinexample.dummy.HeroDummyContent
+import it.justonetouch.kotlinexample.dummy.HeroItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var currentHero: HeroItem? = null
+
     private val adapter by lazy {
-        HeroAdapter(HeroDummyContent.ITEMS) { Snackbar.make(fab, "Tap on: " + it, Snackbar.LENGTH_SHORT).show() }
+        HeroAdapter(HeroDummyContent.ITEMS) {
+            currentHero = it
+            Snackbar.make(fab, "Tap on: " + it, Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
