@@ -3,4 +3,8 @@ package it.justonetouch.kotlinexample.dummy
 /**
  * A dummy item representing a piece of content.
  */
-data class HeroItem(val name: String, val gender: String, val power: Int)
+data class HeroItem(val name: String,
+                    val gender: String,
+                    val power: Int,
+                    var hair: String? = null,
+                    val eyes: String? = null)
