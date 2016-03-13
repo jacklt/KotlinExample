@@ -9,6 +9,6 @@ object HeroDummyContent {
             HeroItem("Iron Man", MALE, 8),
             HeroItem("Thor", MALE, 8),
             HeroItem("Jessica Jones", FEMALE, 2),
-            HeroItem("Spiderman", FEMALE, 4)
+            HeroItem("Spiderman", MALE, 4)
     )
 }
