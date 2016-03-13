@@ -10,24 +10,39 @@ import it.justonetouch.kotlinexample.dummy.HeroAdapter
 import it.justonetouch.kotlinexample.dummy.HeroDummyContent
 import it.justonetouch.kotlinexample.dummy.HeroItem
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private var currentHero: HeroItem? = null
 
-    private val adapter by lazy {
+    private val adapter: HeroAdapter by lazy {
         HeroAdapter(HeroDummyContent.ITEMS) {
             val previousHero = currentHero
             if (previousHero != null) {
-                // fight
-                val conclusion = if (previousHero.power == it.power) {
-                    "It's a draw"
-                } else if (previousHero.power > it.power) {
-                    "${previousHero.name} wins!"
+                if (previousHero.gender != it.gender) {
+                    // love
+                    val name = "Hero ${HeroDummyContent.ITEMS.size}" // TODO increase creativity in naming choice! ;)
+                    val gender = if (Random().nextBoolean()) HeroDummyContent.MALE else  HeroDummyContent.FEMALE
+                    val power = 1 + Random().nextInt(10)
+                    val hair = it.hair ?: previousHero.hair
+                    val eyes = previousHero.eyes ?: it.eyes
+                    val newHero = HeroItem(name, gender, power, hair, eyes)
+                    HeroDummyContent.ITEMS.add(newHero)
+                    Snackbar.make(fab, "${previousHero.name} + ${it.name}\n${newHero.name} (${newHero.hair} hair, ${newHero.eyes} eyes)", Snackbar.LENGTH_LONG).show()
+                    adapter.notifyDataSetChanged()
                 } else {
-                    "${it.name} wins!"
+                    // fight
+                    val conclusion = if (previousHero.power == it.power) {
+                        "It's a draw"
+                    } else if (previousHero.power > it.power) {
+                        "${previousHero.name} wins!"
+                    } else {
+                        "${it.name} wins!"
+                    }
+                    Snackbar.make(fab, "${previousHero.name} vs ${it.name}!\n$conclusion", Snackbar.LENGTH_LONG).show()
                 }
-                Snackbar.make(fab, "${previousHero.name} vs ${it.name}!\n$conclusion", Snackbar.LENGTH_LONG).show()
+
                 currentHero = null
             } else {
                 // assign current hero
@@ -36,8 +51,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    // ...
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
