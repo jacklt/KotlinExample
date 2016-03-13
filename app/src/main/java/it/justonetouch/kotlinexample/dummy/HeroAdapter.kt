@@ -23,7 +23,9 @@ class HeroAdapter(private val mValues: List<HeroItem>, private val mListener: Fu
         val hero = mValues[position]
         holder.item = hero
         holder.nameView.text = "${hero.name} (Power: ${hero.power})"
-        holder.genderView.text = hero.gender
+        val hair = if (hero.hair != null) ", ${hero.hair} hair" else ""
+        val eyes = if (hero.eyes != null) ", ${hero.eyes} eyes" else ""
+        holder.genderView.text = "${hero.gender}$hair$eyes"
 
         holder.itemView.setOnClickListener {
             mListener?.invoke(hero)
